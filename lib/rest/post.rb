@@ -16,8 +16,8 @@ class Post
     begin
       RestClient.post(URL,
         article: { text: @value,
-                   file: File.new(@file_op.path, 'rb'),
-                   crop_file: File.new(@cropfile_op.path, 'rb') }
+                  file: File.new(@file_op.path, 'rb'),
+                  crop_file: File.new(@cropfile_op.path, 'rb') }
       )
       LOG.info "Posted to the server."
     rescue StandardError => err

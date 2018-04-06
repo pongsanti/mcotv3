@@ -1,4 +1,3 @@
-require 'file/file_op'
 # ocr op
 class Ocr
   def initialize(fop)
