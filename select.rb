@@ -29,7 +29,7 @@ def skip_and_compute(recs)
 end
 
 def handle_no_skip(rec)
-  if rec.is_set_or_set50
+  if rec.set_or_set50?
     rec.post_process_and_post_to_server
     LOG.info "Found value: #{rec.ocr}"
     LOG.info "Normalized as: #{rec.normalized}"

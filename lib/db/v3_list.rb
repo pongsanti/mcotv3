@@ -6,7 +6,7 @@ require 'rest/post'
 # First model
 class V3List < Sequel::Model
   REGEX = /(SET|SET[5|S][0|O]) (\d{1,3},\d{3}.\d{2}|\d{3}.\d{2}) (.{1}) (\d{1,3}.\d{2})/
-  SUFFIX = '_c'
+  SUFFIX = '_c'.freeze
 
   set_primary_key :rowid
 
@@ -22,7 +22,7 @@ class V3List < Sequel::Model
 
   def invalid
     self.valid = 0
-    self.save
+    save
     fop = FileOp.new(filename)
     fop.delete
     fop.name_suffix(SUFFIX).delete
@@ -43,38 +43,27 @@ class V3List < Sequel::Model
   end
 
   def do_post
-    Post.new(self.normalized, self.filename).post
+    Post.new(normalized, filename).post
   end
 
   def skip_step
-    if ocr_start('SET50 Val')
-      return 18
-    elsif ocr_start('SET100 Val')
-      return 14
-    elsif ocr_start('SET100')
-      return 16
-    elsif ocr_start('sSET Val') || ocr_start('SSET Val')
-      return 10
-    elsif ocr_start('sSET') || ocr_start('SSET')
-      return 12
-    elsif ocr_start('SETHD Val')
-      return 6
-    elsif ocr_start('SETHD')
-      return 8
-    elsif ocr_start('mai Val')
-      return 2
-    elsif ocr_start('mai')
-      return 4
-    else
-      return 0 # found! don't skip
-    end
+    return 18 if ocr_start('SET50 Val')
+    return 14 if ocr_start('SET100 Val')
+    return 16 if ocr_start('SET100')
+    return 10 if ocr_start('sSET Val') || ocr_start('SSET Val')
+    return 12 if ocr_start('sSET') || ocr_start('SSET')
+    return 6 if ocr_start('SETHD Val')
+    return 8 if ocr_start('SETHD')
+    return 2 if ocr_start('mai Val')
+    return 4 if ocr_start('mai')
+    0 # found! don't skip
   end
 
   def ocr_start(s)
     ocr.start_with?(s)
   end
 
-  def is_set_or_set50
-    self.ocr =~ REGEX
+  def set_or_set50?
+    ocr =~ REGEX
   end
 end
