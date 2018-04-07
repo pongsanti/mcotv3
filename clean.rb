@@ -23,7 +23,6 @@ def day_in_ms(day)
   day * (60 * 60 * 24)
 end
 
-# remove_by_prefix(get_prefix(5))
-# remove_by_prefix(get_prefix(4))
-# remove_by_prefix(get_prefix(3))
-remove_by_prefix(get_prefix(0))
+remove_by_prefix(get_prefix(5))
+remove_by_prefix(get_prefix(4))
+remove_by_prefix(get_prefix(3))
