@@ -31,7 +31,9 @@ end
 def handle_no_skip(rec)
   if rec.is_set_or_set50
     LOG.info "Found value: #{rec.ocr}"
-    Post.new(rec.ocr, rec.filename).post
+    LOG.info "Normalized as: #{rec.normalized}"
+    rec.post_process_and_post_to_server
+    LOG.info '---'
   else
     handle_skips([rec])
   end
@@ -50,7 +52,7 @@ begin
     new_recs = skip_and_compute(list)
     new_recs = skip_and_compute(new_recs) until new_recs.empty?
 
-    LOG.info '--'
+    LOG.info '-----'
     sleep 5
   end
 rescue SignalException => e

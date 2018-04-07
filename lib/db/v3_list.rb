@@ -1,5 +1,7 @@
 require 'file/file_op'
+require 'post_process/post_processor'
 require 'tesseract/ocr'
+require 'rest/post'
 
 # First model
 class V3List < Sequel::Model
@@ -29,6 +31,19 @@ class V3List < Sequel::Model
   def do_ocr
     fop = FileOp.new(filename).name_suffix(SUFFIX)
     self.ocr = Ocr.new(fop).parse
+  end
+
+  def post_process_and_post_to_server
+    do_post_process
+    do_post
+  end
+
+  def do_post_process
+    self.normalized = PostProcessor.new(ocr).normalize
+  end
+
+  def do_post
+    Post.new(self.normalized, self.filename).post
   end
 
   def skip_step
