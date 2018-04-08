@@ -5,7 +5,7 @@ require 'rest/post'
 
 # First model
 class V3List < Sequel::Model
-  REGEX = /(SET|SETS?[5|S][0|O]) (\d{1,3},\d{3}.\d{2}|\d{3}.\d{2}) (.{1}) (\d{1,3}.\d{2})/
+  REGEX = /^(SET|SETS?[5|S][0|O]) (\d{1,3},\d{3}.\d{2}|\d{3}.\d{2}) (.{1}) (\d{1,3}.\d{2})/
   SUFFIX = '_c'.freeze
 
   set_primary_key :rowid
