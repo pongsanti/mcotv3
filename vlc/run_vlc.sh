@@ -1,3 +1,3 @@
 #!/bin/bash
-cvlc -f --meta-title mcot http://localhost:9981/play/stream/service/8d3204cd1011c35eca0bacec61b498de?title=MCOT%20HD%20%2F%20MCOT &
+cvlc --file-logging --logfile=vlc.txt -f --meta-title mcot http://localhost:9981/play/stream/service/d41a6687b297b1427ea81eaf2754d9ea?title=MCOT%20HD%20%2F%20MCOT &
 echo $! > vlc/vlc.pid
