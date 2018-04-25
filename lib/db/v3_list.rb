@@ -23,9 +23,9 @@ class V3List < Sequel::Model
   def invalid
     self.valid = 0
     save
-    fop = FileOp.new(filename)
-    fop.delete
-    fop.name_suffix(SUFFIX).delete
+    #fop = FileOp.new(filename)
+    #fop.delete
+    #fop.name_suffix(SUFFIX).delete
   end
 
   def do_ocr
