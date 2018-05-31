@@ -19,6 +19,10 @@ class PostProcessor
         arr[0] = type
       end
 
+      # replace slash(/) with 7
+      arr[1].sub!('/', '7');
+      
+      # replace += sign
       arr[2].sub!('+', '-')
       arr[2].sub!('7', '-')
       arr[2].sub!('T', '-')
