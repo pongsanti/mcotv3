@@ -49,13 +49,17 @@ class V3List < Sequel::Model
   end
 
   def skip_step
-    return 18 if ocr_start('SET50 Val')
-    return 14 if ocr_start('SET100 Val')
-    return 16 if ocr_start('SET100')
-    return 10 if ocr_start('sSET Val') || ocr_start('SSET Val')
-    return 12 if ocr_start('sSET') || ocr_start('SSET')
-    return 6 if ocr_start('SETHD Val')
-    return 8 if ocr_start('SETHD')
+    return 26 if ocr_start('SET50 Val')
+    return 22 if ocr_start('SET100 Val')
+    return 24 if ocr_start('SET100')
+    return 18 if ocr_start('sSET Val') || ocr_start('SSET Val')
+    return 20 if ocr_start('sSET') || ocr_start('SSET')
+    return 14 if ocr_start('SETHD Val')
+    return 16 if ocr_start('SETHD')
+    return 10 if ocr_start('SETCLMV Val')
+    return 12 if ocr_start('SETCLMV')
+    return 6 if ocr_start('SETTHSI Val')
+    return 8 if ocr_start('SETTHSI')
     return 2 if ocr_start('mai Val')
     return 4 if ocr_start('mai')
     0 # found! don't skip
