@@ -3,6 +3,7 @@ require 'file/file_op'
 # Post multipart form data
 class Post
   URL = ENV['POST_URL']
+  CLIENT = ENV['CLIENT']
   
   def initialize(value, filename = nil)
     @value = value
@@ -17,12 +18,13 @@ class Post
 
     begin
       if @file_op.nil?
-        RestClient.post(URL, article: { text: @value })
+        RestClient.post(URL, article: { text: @value, client: CLIENT })
       else
         RestClient.post(URL,
           article: { text: @value,
                     file: File.new(@file_op.path, 'rb'),
-                    crop_file: File.new(@cropfile_op.path, 'rb') }
+                    crop_file: File.new(@cropfile_op.path, 'rb'),
+                    client: CLIENT }
         )
       end
       LOG.info "Posted to the server."
