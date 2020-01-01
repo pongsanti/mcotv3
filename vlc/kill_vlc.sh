@@ -1,2 +1,3 @@
 #!/bin/bash
-killall vlc 
+killall obs
+#killall vlc 
